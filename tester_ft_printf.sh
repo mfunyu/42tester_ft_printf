@@ -1,6 +1,14 @@
 #!/bin/bash
 
-LIBFTPRINTF=../libftprintf.a
+LIBFTDIR=..
+LIBFTPRINTF=${LIBFTDIR}/libftprintf.a
+
+if [ "$1" == "bonus" ]; then
+	BONUS="-D BONUS"
+	make bonus -C $LIBFTDIR
+else
+	make -C $LIBFTDIR
+fi
 
 # define
 THICK="\033[1m"
@@ -13,10 +21,6 @@ RESET="\033[m"
 if [ ! -e ${LIBFTPRINTF} ]; then
 	printf "${YELLOW}Fatal: libftprintf.a not found. Please check the path\n${RESET}"
 	exit
-fi
-
-if [ "$1" == "bonus" ]; then
-	BONUS="-D BONUS"
 fi
 
 gcc -Wall -Wextra -Werror ${BONUS} main.c ${LIBFTPRINTF} -o ft_printf
