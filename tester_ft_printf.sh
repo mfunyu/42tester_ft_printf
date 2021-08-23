@@ -15,20 +15,27 @@ if [ ! -e ${LIBFTPRINTF} ]; then
 	exit
 fi
 
-gcc -Wall -Wextra -Werror main.c ${LIBFTPRINTF} -o ft_printf
+if [ "$1" == "bonus" ]; then
+	BONUS="-D BONUS"
+fi
+
+gcc -Wall -Wextra -Werror ${BONUS} main.c ${LIBFTPRINTF} -o ft_printf
 if [ $? != 0 ]; then
 	printf "${YELLOW}Fatal: compilation failed. Please check dependencies\n${RESET}"
 	exit
 fi
 
 ./ft_printf > log_act
-gcc -Wall -Wextra -Werror -D REAL main.c -o printf
+gcc -Wall -Wextra -Werror ${BONUS} -D REAL main.c -o printf
+if [ $? != 0 ]; then
+	printf "${YELLOW}Error: wrong usage of printf. Might effect to the output\n${RESET}"
+fi
 ./printf > log_exp
 
 diff -y log_act log_exp
 if [ $? == 0 ]; then
-	printf "${GREEN}OK :)\n${RESET}"
+	printf "${GREEN}[ Perfect! :) ]\n${RESET}"
 else
-	printf "${RED}KO :(\n${RESET}"
+	printf "${RED}[ Diff Found :( ]\n${RESET}"
 fi
 
