@@ -118,10 +118,11 @@ int	bonus(void)
 
 	ret = 0;
 	ret += P("---%%c---\n");
+	/* 0 flag & precision is undefined with %c */
 	ret += P("%12c\n", 'a');
-	ret += P("%0c, %12c\n", 'a', 'i');
-	ret += P("%0c, %12c\n", 'a', 'i');
-	ret += P("%-0c, %.12c\n", 'x', 'X');
+	ret += P("%1c, %12c\n", 'a', 'i');
+	ret += P("%c, %4c\n", ' ', 'i');
+	ret += P("%-8c, %1c\n", 'x', 'X');
 
 	ret += P("---nullstr---\n");
 	ret += P("%-s\n", nullstr);
@@ -131,7 +132,7 @@ int	bonus(void)
 	ret += P("%2.3s\n", nullstr);
 
 	ret += P("---str---\n");
-	/* 0 flag is undefined with %s*/
+	/* 0 flag is undefined with %s */
 	ret += P("%12s\n", str);
 	ret += P("%2.5s\n", str);
 	ret += P("%-12.7s\n", str);
@@ -155,7 +156,6 @@ int	bonus(void)
 	ret += P("%0.1d\n", ft);
 	ret += P("%1.0d %3.0d %4.4d\n", ft, 123456, -1);
 	ret += P("%-1.0d %03.0d %14.4d\n", ft, 123456, -1);
-
 	return (ret);
 }
 
