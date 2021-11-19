@@ -113,16 +113,49 @@ int	bonus(void)
 {
 	int		ret;
 	char	*nullstr = NULL;
+	char	*str = "abcdefg";
 	int		ft = 42;
 
 	ret = 0;
+	ret += P("---%%c---\n");
+	ret += P("%12c\n", 'a');
+	ret += P("%0c, %12c\n", 'a', 'i');
+	ret += P("%0c, %12c\n", 'a', 'i');
+	ret += P("%-0c, %.12c\n", 'x', 'X');
+
+	ret += P("---nullstr---\n");
 	ret += P("%-s\n", nullstr);
 	ret += P("%2s\n", nullstr);
 	ret += P("%10s\n", nullstr);
 	ret += P("%2.8s\n", nullstr);
 	ret += P("%2.3s\n", nullstr);
-	ret += P("%3.0d %3.0d %3.0d %3.0d\n", 0, 42, INT_MAX, INT_MIN);
+
+	ret += P("---str---\n");
+	/* 0 flag is undefined with %s*/
+	ret += P("%12s\n", str);
+	ret += P("%2.5s\n", str);
+	ret += P("%-12.7s\n", str);
+	ret += P("%-20.3s\n", str);
+	ret += P("%10.0s\n", str);
+	ret += P("%.8s\n", str);
+
+	ret += P("---%%d INT_MIN/MAX ---\n");
+	ret += P("%-d\n", INT_MAX);
+	ret += P("%-d\n", INT_MIN);
+	ret += P("%20d\n", INT_MAX);
+	ret += P("%20d\n", INT_MIN);
+	ret += P("%0.0d\n", INT_MAX);
+	ret += P("%0.0d\n", INT_MIN);
+	ret += P("%0.12d\n", INT_MAX);
+	ret += P("%0.12d\n", INT_MIN);
+	ret += P("%3.0d %3.0d\n", INT_MAX, INT_MIN);
+
+	ret += P("---%%d basics---\n");
 	ret += P("%.1d\n", ft);
+	ret += P("%0.1d\n", ft);
+	ret += P("%1.0d %3.0d %4.4d\n", ft, 123456, -1);
+	ret += P("%-1.0d %03.0d %14.4d\n", ft, 123456, -1);
+
 	return (ret);
 }
 
