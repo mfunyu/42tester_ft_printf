@@ -31,16 +31,21 @@ int	mandatory(void)
 	ret += P("%c\n", 127); //        0111 1111
 	ret += P("%c\n", -129); // ...11 0111 1111 (-256 + 127)
 	ret += P("%c\n", -385); // ...10 0111 1111 (-512 + 127)
+	ret += P("%c%c\n", 'A', 'K');
+	ret += P("%c %c\n", '#', '!');
 
 	ret += P("---%%s---\n");
 	ret += P("%s\n", "hello world!");
 	ret += P("%s\n", "");
 	ret += P("%s\n", nullstr);
+	ret += P("%s%s\n", nullstr, nullstr);
 	ret += P("hello %s %s \n", "world", nullstr);
+	ret += P("hello s%sss%s\n", "world", nullstr);
 
 	ret += P("---%%p---\n");
 	ret += P("%p\n", addr);
 	ret += P("%p\n", NULL);
+	ret += P("%p%p%p\n", NULL, addr, NULL);
 
 	ret += P("---%%d---\n");
 	ret += P("%d\n", ft);
@@ -49,6 +54,8 @@ int	mandatory(void)
 	ret += P("%d\n", -1);
 	ret += P("%d\n", INT_MAX);
 	ret += P("%d\n", INT_MIN);
+	ret += P("%d %d %d %d\n", 0, INT_MIN, -42, INT_MAX);
+	ret += P("%d%d%d\n", -13, -42, INT_MAX);
 
 	ret += P("---%%i---\n");
 	ret += P("%i\n", ft);
@@ -57,6 +64,7 @@ int	mandatory(void)
 	ret += P("%i\n", -15);
 	ret += P("%i\n", INT_MAX);
 	ret += P("%i\n", INT_MIN);
+	ret += P("%i %i %i\n", INT_MIN, -1, 10000);
 
 	ret += P("---%%u---\n");
 	ret += P("%u\n", ft);
@@ -66,6 +74,7 @@ int	mandatory(void)
 	ret += P("%u\n", INT_MAX);
 	ret += P("%u\n", INT_MIN);
 	ret += P("%u\n", UINT_MAX);
+	ret += P("%u %u %u %u\n", -UINT_MAX - 1, UINT_MAX, 0, -1);
 
 	ret += P("---%%x---\n");
 	ret += P("%x\n", ft);
@@ -78,6 +87,7 @@ int	mandatory(void)
 	ret += P("%x\n", INT_MAX);
 	ret += P("%x\n", INT_MIN);
 	ret += P("%x\n", UINT_MAX);
+	ret += P("%x%x %x%x\n", -UINT_MAX - 1, -1000, ft, UINT_MAX);
 
 	ret += P("---%%X---\n");
 	ret += P("%X\n", ft);
@@ -91,9 +101,11 @@ int	mandatory(void)
 	ret += P("%X\n", INT_MAX);
 	ret += P("%X\n", INT_MIN);
 	ret += P("%X\n", UINT_MAX);
+	ret += P("%X%X%X\n", ft, 42, -UINT_MAX - 1);
 
 	ret += P("---%%%%---\n");
 	ret += P("%%\n");
+	ret += P("%%%% %%%%%%\n");
 	return (ret);
 }
 
