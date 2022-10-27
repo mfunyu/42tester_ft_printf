@@ -5,6 +5,15 @@
 git clone https://github.com/mfunyu/42tester_ft_printf.git
 ```
 
+### Directory Structure
+```
+─ your_ft_printf
+  ├── 42tester_ft_printf
+  ├── Makefile
+  ...
+  └── libftprintf.a
+```
+
 ## Usage
 ```
 cd 42tester_ft_printf
